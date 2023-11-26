@@ -1,0 +1,64 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+    markup = "pango"
+    colors = true
+    interval = 1
+}
+
+order += "volume master"
+order += "wireless _first_"
+order += "battery all"
+order += "cpu_usage"
+order += "cpu_temperature 0"
+order += "memory"
+order += "disk /"
+order += "tztime local"
+
+
+volume master {
+    format = "<span color='#1793d1'>Vol.:</span> %volume"
+    format_muted = "Vol.: muted (%volume)"
+}
+
+wireless _first_ {
+        format_up = "W: %quality at %essid (%ip) %bitrate %frequency"
+        format_down = "W: down"
+}
+
+battery all {
+    format = "<span color='#1793d1'>BAT:</span> %status %percentage %remaining"
+    low_threshold = "20"
+    threshold_type = "percentage"
+}
+
+cpu_usage {
+    format = "CPU: %cpu0 %cpu1 %cpu2 %cpu3 %cpu4 %cpu5 %cpu6 %cpu7"
+    degraded_threshold = "70"
+    max_threshold = "90"
+}
+
+cpu_temperature 0 {
+    format = "CPU T: %degrees °C"
+    path = "/sys/class/thermal/thermal_zone8/temp"
+}
+
+memory {
+    format = "M: %used / %total"
+    threshold_degraded = "1G"
+    format_degraded = "MEMORY < %available"
+}
+
+disk "/" {
+    format = "D: %avail / %total"
+}
+
+tztime local {
+    format = "%Y-%m-%d %H:%M:%S"
+}
